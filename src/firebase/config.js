@@ -8,7 +8,6 @@ import {getFirestore} from "firebase/firestore";
 // storage erişimi için (resim kayıt yeri)
 import { getStorage } from "firebase/storage";
 
-
 const firebaseConfig = {
   apiKey: "AIzaSyACrGbya9BlhfnTAaEsAXWA0Mpb_Uo3Yqg",
   authDomain: "e-ticaret-class-b3935.firebaseapp.com",
@@ -25,4 +24,4 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
 
-export default app;
+export default app; 
