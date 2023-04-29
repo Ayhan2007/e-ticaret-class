@@ -17,7 +17,7 @@ const Reset = () => {
   const resetPassword = (e) => {
     e.preventDefault();
     setIsLoading(true)
-    // alert(email)
+    // alert(email);
     sendPasswordResetEmail(auth,email)
     .then(()=>{
       setIsLoading(false)
@@ -28,6 +28,7 @@ const Reset = () => {
       toast.error(error.message)
     })
   }
+
   return (
     <>
     {isLoading && <Loader/>}
@@ -38,7 +39,7 @@ const Reset = () => {
       <Card cardClass={styles.form}>
         <h2>Reset</h2>
         <form onSubmit={resetPassword}>
-          <input type="text" placeholder="Email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input type="text" placeholder="Email" required value={email} onChange={(e) => setEmail(e.target.value)}/>
           <button type="submit" className="--btn --btn-primary --btn-block">Reset Password</button>
           <div className={styles.links}>
             <p>

@@ -6,9 +6,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import {FaGoogle} from "react-icons/fa"
 import Card from "../../components/card/Card"
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import {auth} from "../../firebase/config"
+import { auth } from "../../firebase/config"
 import { toast } from 'react-toastify'
-import Loader from '../../components/loader/Loader'
+import Loader from "../../components/loader/Loader"
 import { GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
@@ -16,12 +16,12 @@ const Login = () => {
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
 
-  const [isLoading,setIsLoading] =useState(false)
+  const [isLoading,setIsLoading] = useState(false)
 
   const navigate = useNavigate();
 
   const loginUser = (e) => {
-    e.preventDefault ()
+    e.preventDefault()
     // console.log(email,password)
     setIsLoading(true)
     signInWithEmailAndPassword(auth, email, password)
@@ -30,11 +30,11 @@ const Login = () => {
     const user = userCredential.user;
     toast.success("Login Successful..")
     navigate("/")
-  })
-  .catch((error) => {
-    setIsLoading(false)
-    toast.error(error.message)
-  });
+    })
+    .catch((error) => {
+      setIsLoading(false)
+      toast.error(error.message)
+    });
   }
 
   const provider = new GoogleAuthProvider();
@@ -42,7 +42,7 @@ const Login = () => {
     signInWithPopup(auth, provider)
   .then((result) => {
     const user = result.user;
-    toast.success("Login Successfully..")
+    toast.success("Login Successfully...")
     navigate("/")
   }).catch((error) => {
     toast.error(error.message)
@@ -58,9 +58,9 @@ const Login = () => {
       </div>
       <Card cardClass={styles.form}>
         <h2>Login</h2>
-        <form onSubmit= {loginUser}>
+        <form onSubmit={loginUser}>
           <input type="text" placeholder="Email" required value={email} onChange={(e) => setEmail(e.target.value)} />
-          <input type="password" placeholder="Password" required value={password} onChange={(e) => setPassword(e.target.value)}/>
+          <input type="password" placeholder="Password" required value={password} onChange={(e) => setPassword(e.target.value)} />
           <button type="submit" className="--btn --btn-primary --btn-block">Login</button>
           <div className={styles.links}>
             <Link to="/reset">Reset Password</Link>
