@@ -6,7 +6,7 @@ import {BsFillGridFill} from "react-icons/bs"
 import Search from '../../search/Search'
 import ProductItem from '../productItem/ProductItem'
 
-const ProductList = () => {
+const ProductList = ({products}) => {
 
   const [grid,setGrid] = useState(true)
   const [search,setSearch] =useState("")
