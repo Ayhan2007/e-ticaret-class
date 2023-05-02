@@ -25,7 +25,7 @@ const useFetchDocument = (collectionName, documentID) => {
     } catch(error) {
       toast.error(error)
     }
-  }, [collectionNaöe,documentID])
+  }, [collectionName,documentID])
   return document;
 }
 
