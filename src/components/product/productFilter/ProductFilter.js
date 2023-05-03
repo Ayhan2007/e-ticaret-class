@@ -27,7 +27,7 @@ const ProductFilter = () => {
   ]
 
   useEffect(()=> {
-    dispatch(FILTER_BY_BRAND({product,brand}))
+    dispatch(FILTER_BY_BRAND({products,brand}))
   }, [dispatch,products,brand])
 
   useEffect(()=> {
