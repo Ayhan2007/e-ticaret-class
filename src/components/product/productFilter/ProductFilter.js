@@ -31,15 +31,19 @@ const ProductFilter = () => {
   }, [dispatch,products,brand])
 
   useEffect(()=> {
-    dispatch(FILTER_BY_PRICE)
-  })
+    dispatch(FILTER_BY_PRICE({products,price}))
+  }, [dispatch,products,price])
+
   const filterProducts = (cat) => {
     setCategory(cat)
     dispatch(FILTER_BY_CATEGORY({products, category: cat}))
   }
 
-  const clearFilters = []
-
+  const clearFilters = () => {
+    setCategory("All")
+    setBrand("All")
+    setPrice(maxPrice)
+  }
   return (
     <div className={styles.filter}>
       <h4>Categories</h4> 
@@ -49,18 +53,16 @@ const ProductFilter = () => {
             <button key={index} type="button" className={`${category}` === cat ? `${styles.active}` : null} onClick={()=> filterProducts(cat)}>&#8250; {cat}</button>
           )
         })
-
         }
       </div>
       <h4>Brand</h4>
       <div className={styles.brand}>
-        <select alue={brand} onChange={(e)=> setBrand(e.target.value)} name="brand">
+        <select value={brand} onChange={(e)=> setBrand(e.target.value)} name="brand">
           {allBrands.map((brand,index)=> {
             return (
               <option key={index} value={brand}>{brand}</option>
             )
           })}
-          <option value="all">All</option>
         </select>
         <h4>Price</h4>
         <p>{`$${price}`}</p>
