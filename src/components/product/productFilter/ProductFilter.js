@@ -9,7 +9,7 @@ const ProductFilter = () => {
 
   const [category,setCategory] = useState("All")
   const [brand,setBrand] = useState("All")
-  const [price,setPrice] = useState(3000)
+  const [price,setPrice] = useState(0)
 
   const products = useSelector(selectProducts)
   const minPrice = useSelector(selectMinPrice)
@@ -25,7 +25,9 @@ const ProductFilter = () => {
     "All", 
     ...new Set(products.map((product) => product.brand))
   ]
-
+  useEffect(() => {
+    setPrice(maxPrice)
+  }, [maxPrice])
   useEffect(()=> {
     dispatch(FILTER_BY_BRAND({products,brand}))
   }, [dispatch,products,brand])
@@ -43,6 +45,7 @@ const ProductFilter = () => {
     setCategory("All")
     setBrand("All")
     setPrice(maxPrice)
+    dispatch(FILTER_BY_CATEGORY({products, category: "All"}))
   }
   return (
     <div className={styles.filter}>
