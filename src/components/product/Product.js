@@ -1,5 +1,5 @@
 ////home sayfasında productlist ve productfilterin beraber sergilendiği yer
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "./Product.module.scss"
 import ProductFilter from './productFilter/ProductFilter'
 import ProductList from './productList/ProductList'
@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GET_PRICE_RANGE, STORE_PRODUCTS, selectProducts } from '../../redux/slice/productSlice'
 import spinnerImg from "../../assets/spinner.gif"
 import {FaCogs} from "react-icons/fa"
-import { useState } from 'react'
 
 const Product = () => {
 

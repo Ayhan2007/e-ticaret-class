@@ -11,9 +11,9 @@ const Pagination = ({curretnPage,setCurrentPage,productsPerPage,totalProducts}) 
   const [maxPageNumberLimit,setMaxPageNumberLimit] = useState(5)
   const [minPageNumberLimit,setMinPageNumberLimit] = useState(0)
   return (
+
+
     
-
-
   )
 }
 

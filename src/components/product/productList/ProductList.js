@@ -7,7 +7,7 @@ import Search from '../../search/Search'
 import ProductItem from '../productItem/ProductItem'
 import { useDispatch, useSelector } from 'react-redux'
 import { FILTER_BY_SEARCH, SORT_PRODUCTS, selectFilteredProducts } from '../../../redux/slice/filterSlice'
-import Pagination from "../../../components/pagination/Pagination"
+import Pagination from "../../pagination/Pagination"
 
 const ProductList = ({products}) => {
 
@@ -23,7 +23,8 @@ const ProductList = ({products}) => {
 
   const indexOfFirstProduct = (currentPage-1) * productsPerPage
   const indexOfLastProduct = currentPage * productsPerPage
-
+  // 9 eleman istiyorsak slice (0,9)(9,18)(18,27)
+  // 5 eleman istiyorsak slice (0,5)(5,10)(10,15)
   const currentProducts = filteredProducts.slice(indexOfFirstProduct,indexOfLastProduct)
 
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const ProductList = ({products}) => {
   useEffect(()=> {
     dispatch(SORT_PRODUCTS({products,sort}))
   },[ dispatch, products, sort])
+
   useEffect(()=> {
     dispatch(FILTER_BY_SEARCH({products,search}))
   },[ dispatch, products, search])
@@ -80,7 +82,7 @@ const ProductList = ({products}) => {
           </>
         )}
       </div>
-      <Pagination currentPage={currentPage setCurrentPage={setCurrentPage} productsPerPage={produtcsPerPage} totalProducts}
+      <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} productsPerPage={produtcsPerPage} totalProducts={filteredProducts.length}/>
     </div>
   )
 }
