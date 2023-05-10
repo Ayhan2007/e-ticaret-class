@@ -82,7 +82,7 @@ const ProductList = ({products}) => {
           </>
         )}
       </div>
-      <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} productsPerPage={produtcsPerPage} totalProducts={filteredProducts.length}/>
+      <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} productsPerPage={productsPerPage} totalProducts={filteredProducts.length}/>
     </div>
   )
 }
