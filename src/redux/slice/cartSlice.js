@@ -3,10 +3,10 @@ import { createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify';
 
 const initialState = {
-  cartItems: localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("carItems")) : [],
+  cartItems: localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [],
   cartTotalQuantity: 0,
   cartTotalAmount: 0,
-  previousURL:""
+  previousURL: ""
 }
 
 const cartSlice = createSlice({
@@ -18,12 +18,12 @@ const cartSlice = createSlice({
       const productIndex = state.cartItems.findIndex((item) => item.id === action.payload.id)
 
       if(productIndex >= 0) {
-        state.cartItems[productIndex].cartQuantity +=1
+        state.cartItems[productIndex].cartQuantity += 1
         toast.info(`${action.payload.name} increased by one`,{position:"top-left"})
       } else {
         const tempProduct = {...action.payload, cartQuantity:1}
         state.cartItems.push(tempProduct)
-        toast.success(`${action.payload.name} added to cart`, {position:"top-left"})
+        toast.success(`${action.payload.name} added to cart`,{position:"top-left"})
       }
       localStorage.setItem("cartItems",JSON.stringify(state.cartItems))
     },
@@ -31,7 +31,7 @@ const cartSlice = createSlice({
       const productIndex = state.cartItems.findIndex((item) => item.id === action.payload.id)
 
       if(state.cartItems[productIndex].cartQuantity > 1) {
-        state.cartItems[productIndex].cartQuantity -= 1
+        state.cartItems[productIndex].cartQuantity -= 1 
         toast.info(`${action.payload.name} decreased by one`,{position:"top-left"})
       } else if (state.cartItems[productIndex].cartQuantity === 1) {
         const newCartItem = state.cartItems.filter((item)=> item.id !== action.payload.id)
@@ -53,7 +53,7 @@ const cartSlice = createSlice({
     },
     CALCULATE_SUBTOTAL(state,action) {
       let total = 0
-      state.cartItems.map((item)=> {
+      state.cartItems.map((item)=>{
         const {price,cartQuantity} = item;
         const cartItemAmount = price * cartQuantity
         return total += cartItemAmount
