@@ -2,15 +2,15 @@
 import React, { useEffect } from 'react'
 import styles from "./OrderHistory.module.scss"
 import useFetchCollection from '../../customHooks/useFetchCollection'
-import { selectOrderHistory } from '../../redux/slice/orderSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { STORE_ORDERS, selectOrderHistory } from '../../redux/slice/orderSlice'
 import { selectUserID } from '../../redux/slice/authSlice'
 import { useNavigate } from 'react-router-dom'
+import Loader from '../../components/loader/Loader'
 
 const OrderHistory = () => {
 
   const {data, isLoading} = useFetchCollection("orders")
-
   const orders = useSelector(selectOrderHistory)
   const userID = useSelector(selectUserID)
 
@@ -20,13 +20,13 @@ const OrderHistory = () => {
   useEffect(()=> {
     dispatch(STORE_ORDERS(data))
   },[dispatch,data])
-
+  
   const handleClick = (id) => {
-    navigate(`/order-details/$(id)`)
+    navigate(`/order-details/${id}`)
   }
 
   const filteredOrders = orders.filter((order)=> order.userID === userID)
-  
+  // console.log(filteredOrders)
   return (
     <section>
       <div className="container">
@@ -49,6 +49,22 @@ const OrderHistory = () => {
                   <th>Order Status</th>
                 </tr>
               </thead>
+              <tbody>
+                {filteredOrders.map((order,index)=>{
+                  const {id,orderDate,orderTime,orderAmount,orderStatus} = order
+                  return (
+                    <tr key={id} onClick={()=>handleClick(id)}>
+                      <td>{index+1}</td>
+                      <td>{orderDate} at {orderTime}</td>
+                      <td>{id}</td>
+                      <td>{"$"}{orderAmount}</td>
+                      <td>
+                        <p className={orderStatus !== "Delivered" ? `${styles.pending}` : `${styles.delivered}`}>{orderStatus}</p>
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
             </table>
           )}
         </div>
